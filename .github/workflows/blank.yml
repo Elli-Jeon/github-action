@@ -6,7 +6,7 @@ name: Automatic Pull Request
 on:
   # Triggers the workflow on push or pull request events but only for the main branch
   push:
-    branches: [test]
+    branches: [MVP]
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -23,11 +23,11 @@ jobs:
 
       # Create PR
       - name: auto PR
-        if: github.event.commits[0].message == '[test] test'
+        if: github.event.commits[0].message == '[Build] test'
         uses: devops-infra/action-pull-request@v0.4.2
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          source_branch: test
+          source_branch: MVP
           target_branch: main
           title: Alpha Test (Merge MVP to main)
           template: .github/PULL_REQUEST_TEMPLATE/CHECK.md
