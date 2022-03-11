@@ -13,7 +13,7 @@ jobs:
   Build:
     runs-on: ubuntu-latest
 
-    steps: 
+    steps:
       - name: Cache node_modules
         uses: actions/cache@v1
         with:
@@ -23,28 +23,25 @@ jobs:
             ${{ runner.OS }}-build-
             ${{ runner.OS }}-
 
-
       - name: Checking out Code
         uses: actions/checkout@v2
-        with: 
+        with:
           persist-credentials: false
           fetch-depth: 0
 
-      - name: Install Dependencies    # 의존 파일 설치
+      - name: Install Dependencies # 의존 파일 설치
         run: npm ci
 
-      - name: Build                   # React Build
+      - name: Build # React Build
         run: npm run build
 
       - name: Commit & Push changes
         uses: actions-js/push@master
-        with: 
+        with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           branch: MVP
-          message: [Built] test
-  
-  
-  
+          message: "[Built] test"
+
   AutoPR:
     needs: Build
     # The type of runner that the job will run on
